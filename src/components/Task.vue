@@ -14,8 +14,8 @@
                 this.$store.dispatch('addTaskAction')
                 this.nameTask = ''
             },
-            deletedTask() {
-                this.$store.dispatch('deletedTaskAction')
+            deletedTask(index) {
+                this.$store.dispatch('deletedTaskAction', index)
             },
             deletedTaskSuccess() {
                 this.$store.dispatch('deletedTaskSuccessAction')
