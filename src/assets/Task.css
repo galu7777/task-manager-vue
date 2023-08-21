@@ -6,9 +6,19 @@ input {
     font-size: 1.8rem;
   }
 
+  .card-container {
+    border-radius: 4px;
+    padding: 16px;
+    background-color: rgba(82, 78, 78, 0.4);
+    box-shadow: 0 8px 32px #db9b11;
+    backdrop-filter: blur(6.0px);
+    margin-top: 8%;
+  }
+
   .cursor {
     cursor: pointer;
   }
+
   .title {
     color: #fff;
     font-size: 2rem;
