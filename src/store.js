@@ -27,8 +27,8 @@ export default createStore({
     addTaskAction(context) {
       context.commit('addTask');
     },
-    deletedTaskAction(context) {
-      context.commit('deletedTask');
+    deletedTaskAction(context, index) {
+      context.commit('deletedTask', index);
     },
     deletedTaskSuccessAction(context) {
         context.commit('deletedTaskSuccess');
