@@ -4,8 +4,6 @@
         data(){
             return {
                 nameTask: '',
-                task: null,
-                taskSuccess: null
             }
         },
         methods: {
@@ -14,23 +12,18 @@
                 this.$store.dispatch('addTaskAction')
                 this.nameTask = ''
             },
-            deletedTask() {
-                this.$store.dispatch('deletedTaskAction')
+            deletedTask(index) {
+                this.$store.dispatch('deletedTaskAction', index)
             },
             deletedTaskSuccess() {
                 this.$store.dispatch('deletedTaskSuccessAction')
             },
             updateTask(index) {
-                    this.$store.state.Tasks[index].state = !this.$store.state.Tasks[index].state
-                    this.task = this.$store.state.Tasks[index]
-                    this.$store.state.TasksSuccess.push(this.task)
-                    this.$store.state.Tasks.splice(index, 1)                
+                this.$store.dispatch('updateTaskAction', index)
+
             },
-            updateTaskSuccess(index) {                
-                this.$store.state.TasksSuccess[index].state = false
-                this.taskSuccess = this.$store.state.TasksSuccess[index]
-                this.$store.state.Tasks.push(this.taskSuccess)
-                this.$store.state.TasksSuccess.splice(index, 1)
+            updateTasksSuccess(index) {
+                this.$store.dispatch('updateTasksSuccess', index)
             }
         }
     }
@@ -80,7 +73,7 @@
                     </div>
                     <ul class="list-group" v-for="(task, index) in $store.state.TasksSuccess" :key="index">
                         <li class="list-group-item d-flex justify-content-between">
-                            <span :class="[task.state === true ? 'text-success': 'text', 'cursor']" @click="updateTaskSuccess(index)">
+                            <span :class="[task.state === true ? 'text-success': 'text', 'cursor']" @click="updateTasksSuccess(index)">
                                 <i 
                                     :class="[task.state === true ?'fa-solid fa-circle-check': 'fa-regular fa-circle' ]">
                                 </i>
