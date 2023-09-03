@@ -5,6 +5,8 @@ export default createStore({
     Tasks: [],
     TasksSuccess: [],
     nameTask: null,
+    isUserLoggedIn: false,
+    user: {}
   },
   mutations: {
     addTask(state) {
@@ -33,6 +35,12 @@ export default createStore({
       const taskSuccess = state.TasksSuccess[index]
       state.Tasks.push(taskSuccess)
       state.TasksSuccess.splice(index, 1)
+    },
+    isLogin(state, user){
+      console.log(user)
+      if(state.isUserLoggedIn === false) state.isUserLoggedIn = true
+      state.user = user
+      console.log(state.user)
     }    
   },
   actions: {
@@ -50,6 +58,9 @@ export default createStore({
     },
     updateTasksSuccess(context, index) {
       context.commit('updateTasksSuccess', index)
+    },
+    isLogin(context, user) {
+      context.commit('isLogin', user);
     }
   }
 });
