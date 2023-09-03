@@ -1,5 +1,5 @@
 <script>
-
+    
 </script>
 
 <template>
@@ -33,7 +33,7 @@
                     </div>
                     
                     <div class="my-3 row">
-                        <span>Ya tienes una cuenta ? <a href="#">Iniciar Sesion</a></span>
+                        <span>Ya tienes una cuenta ? <router-link to="/login">Iniciar Sesion</router-link></span>
                         <span><a href="#">Recuperar Password</a></span>
                     </div>
                     <!-- redes sociales -->
