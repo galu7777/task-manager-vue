@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Home from '../components/Home.vue'
+import store from '../store'
 
 const routes = [
     { path: '/', component: Login },
@@ -18,10 +19,21 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if(to.meta.needsAuth){
-        next('/login')
+        if(store.state.isUserLoggedIn){
+            next()
+        } else {
+            next('/login')
+        }        
     } else {
         next()
     }
 })
+
+store.watch(
+    (state) => state.isUserLoggedIn,
+    () => {
+        router.push(router.currentRoute.value.fullPath)
+    }    
+)
 
 export default router;
