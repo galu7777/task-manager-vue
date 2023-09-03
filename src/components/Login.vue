@@ -1,5 +1,25 @@
 <script>
-
+    export default {
+        data() {
+            return {
+                user: {
+                    nick_name: '',
+                    password: ''
+                }
+            }
+        },
+        methods: {
+            async isLogin() {
+                try {
+                    await this.$store.dispatch('isLogin', this.user)
+                    this.$router.push('/home')
+                    this.user = {}
+                } catch (error) {
+                    console.log('Error:', error)
+                }
+            }
+        }
+    }
 </script>
 
 <template>
@@ -16,24 +36,24 @@
                     <!--- login --->
                 <form action="">
                     <div class="mb-4">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email">
+                        <label for="text" class="form-label">Nombre de Usuario</label>
+                        <input v-model="user.nick_name" type="text" class="form-control" name="email">
                     </div>
                     <div class="mb-4">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input v-model="user.password" type="password" class="form-control" name="password">
                     </div>
-                    <div class="mb-4 form-check">
+                    <!-- <div class="mb-4 form-check">
                         <input type="checkbox" name="connected" class="form-check-input" id="">
                         <label for="connected" class="form-check-label">Mantenerme conectado</label>
-                    </div>
+                    </div> -->
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="isLogin">Iniciar Sesión</button>
                     </div>
                     
                     <div class="my-3 row">
-                        <span>No tienes cuenta ? <a href="#">Registrate</a></span>
+                        <span>No tienes cuenta ? <router-link to="/register">Registrate</router-link></span>
                         <span><a href="#">Recuperar Password</a></span>
                     </div>
                     <!-- redes sociales -->
