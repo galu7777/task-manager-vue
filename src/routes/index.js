@@ -19,9 +19,9 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if(to.meta.needsAuth){
-        if(store.state.isUserLoggedIn){
+        if(store.state.token){
             next()
-        } else {
+        } else if (store.state.token === ''){
             next('/login')
         }        
     } else {
@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
 })
 
 store.watch(
-    (state) => state.isUserLoggedIn,
+    (state) => state.token,
     () => {
         router.push(router.currentRoute.value.fullPath)
     }    
