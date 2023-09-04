@@ -1,3 +1,13 @@
+<script>
+    export default {
+        methods: {
+            isLogout() {
+                this.$store.dispatch('isLogout')
+                this.$router.push('/login')
+            }
+        }
+    }
+</script>
 <template>
     <div>
         <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
@@ -5,6 +15,9 @@
                 <div class="ctn">
                     <img src="../assets/check.png" alt="check" class="img">
                     <span class="navbar-brand mb-0 h1">Tasks Manager App</span>
+                </div>
+                <div>
+                    <button @click="isLogout">Logout</button>
                 </div>
             </div>
         </nav>
