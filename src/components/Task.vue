@@ -53,9 +53,9 @@
                     </div>
                     <ul class="list-group" v-for="(task, index) in $store.state.Tasks" :key="index">
                         <li class="list-group-item d-flex justify-content-between">
-                            <span :class="[task.state === false ? 'text': 'text-success', 'cursor']" @click="updateTask(index)">
+                            <span :class="[task.state === 'pending' || null || undefined ? 'text': 'text-success', 'cursor']" @click="updateTask(index)">
                                 <i 
-                                    :class="[task.state === false ? 'fa-regular fa-circle' : 'fa-solid fa-circle-check' ]">
+                                    :class="[task.state === 'pending' || null || undefined ? 'fa-regular fa-circle' : 'fa-solid fa-circle-check' ]">
                                 </i>
                             </span>
                             {{ task.name }}
@@ -73,9 +73,9 @@
                     </div>
                     <ul class="list-group" v-for="(task, index) in $store.state.TasksSuccess" :key="index">
                         <li class="list-group-item d-flex justify-content-between">
-                            <span :class="[task.state === true ? 'text-success': 'text', 'cursor']" @click="updateTasksSuccess(index)">
+                            <span :class="[task.state === 'done' ? 'text-success': 'text', 'cursor']" @click="updateTasksSuccess(index)">
                                 <i 
-                                    :class="[task.state === true ?'fa-solid fa-circle-check': 'fa-regular fa-circle' ]">
+                                :class="[task.state === 'done' ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle']">
                                 </i>
                             </span>
                             {{ task.name }}
