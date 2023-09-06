@@ -17,7 +17,9 @@
                     <span class="navbar-brand mb-0 h1">Tasks Manager App</span>
                 </div>
                 <div>
-                    <button @click="isLogout">Logout</button>
+                    <span class="cursor text-danger" @click="isLogout">
+                        <i class="fa-solid fa-right-from-bracket fa-size"></i>
+                    </span>
                 </div>
             </div>
         </nav>
@@ -33,5 +35,8 @@
     .img {
         height: 2rem;
         margin-right: 5px;
+    }
+    .fa-size {
+        font-size :2em;
     }
 </style>
