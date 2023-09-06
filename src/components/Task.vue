@@ -1,5 +1,5 @@
 <script>
-    import { addTaskSwal, deletedTaskSwal, deletedTaskSuccessSwal } from '../helpers/modalSwal'
+    import { addTaskSwal, deletedTaskSwal, deletedTaskSuccessSwal } from '../helpers/modalSwal.js' 
     import '../assets/Task.css' 
     export default {
         data(){
@@ -10,9 +10,10 @@
         },
         methods: {
             addTask() {
-                addTaskSwal()               
+                addTaskSwal(this.nameTask)
+                this.nameTask = ''               
             },
-            deletedTask(index) {
+            deletedTask() {
                 deletedTaskSwal()
             },
             deletedTaskSuccess() {
