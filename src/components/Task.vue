@@ -1,22 +1,22 @@
 <script>
+    import { addTaskSwal, deletedTaskSwal, deletedTaskSuccessSwal } from '../helpers/modalSwal'
     import '../assets/Task.css' 
     export default {
         data(){
             return {
                 nameTask: '',
+                task: null
             }
         },
         methods: {
             addTask() {
-                this.$store.state.nameTask = this.nameTask
-                this.$store.dispatch('addTaskAction')
-                this.nameTask = ''
+                addTaskSwal()               
             },
             deletedTask(index) {
-                this.$store.dispatch('deletedTaskAction', index)
+                deletedTaskSwal()
             },
             deletedTaskSuccess() {
-                this.$store.dispatch('deletedTaskSuccessAction')
+                deletedTaskSuccessSwal()              
             },
             updateTask(index) {
                 this.$store.dispatch('updateTaskAction', index)
@@ -53,9 +53,9 @@
                     </div>
                     <ul class="list-group" v-for="(task, index) in $store.state.Tasks" :key="index">
                         <li class="list-group-item d-flex justify-content-between">
-                            <span :class="[task.state === 'pending' || null || undefined ? 'text': 'text-success', 'cursor']" @click="updateTask(index)">
+                            <span :class="['text', 'cursor']" @click="updateTask(index)">
                                 <i 
-                                    :class="[task.state === 'pending' || null || undefined ? 'fa-regular fa-circle' : 'fa-solid fa-circle-check' ]">
+                                    :class="['fa-regular fa-circle']">
                                 </i>
                             </span>
                             {{ task.name }}
@@ -73,9 +73,9 @@
                     </div>
                     <ul class="list-group" v-for="(task, index) in $store.state.TasksSuccess" :key="index">
                         <li class="list-group-item d-flex justify-content-between">
-                            <span :class="[task.state === 'done' ? 'text-success': 'text', 'cursor']" @click="updateTasksSuccess(index)">
+                            <span :class="['text-success', 'cursor']" @click="updateTasksSuccess(index)">
                                 <i 
-                                :class="[task.state === 'done' ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle']">
+                                :class="['fa-solid fa-circle-check']">
                                 </i>
                             </span>
                             {{ task.name }}
