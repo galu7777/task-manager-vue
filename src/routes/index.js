@@ -6,10 +6,10 @@ import Home from '../components/Home.vue'
 import store from '../store'
 
 const routes = [
-    { path: '/', component: Login },
-    { path: '/home', component: Home, meta: { needsAuth: true } },
-    { path: '/login', component: Login },
-    { path: '/register', component: Register }
+    { path: '/', name: 'root', component: Login },
+    { path: '/home', name: 'home', component: Home, meta: { needsAuth: true } },
+    { path: '/login', name: 'login', component: Login },
+    { path: '/register', name: 'register', component: Register }
 ]
 
 const router = createRouter({
