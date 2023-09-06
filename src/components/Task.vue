@@ -1,5 +1,5 @@
 <script>
-    import { addTaskSwal, deletedTaskSwal, deletedTaskSuccessSwal } from '../helpers/modalSwal.js' 
+    import { addTaskSwal, deletedTaskSwal, deletedTaskSuccessSwal, updateTaskNameSwal } from '../helpers/modalSwal.js' 
     import '../assets/Task.css' 
     export default {
         data(){
@@ -19,6 +19,9 @@
             deletedTaskSuccess() {
                 deletedTaskSuccessSwal()              
             },
+            updateTaskName(index){
+                updateTaskNameSwal(index)
+            },
             updateTask(index) {
                 this.$store.dispatch('updateTaskAction', index)
 
@@ -26,6 +29,7 @@
             updateTasksSuccess(index) {
                 this.$store.dispatch('updateTasksSuccess', index)
             }
+            
         }
     }
 </script>
@@ -60,9 +64,14 @@
                                 </i>
                             </span>
                             {{ task.name }}
-                            <span class="cursor text-danger" @click="deletedTask(index)">
-                                <i class="fa-solid fa-trash"></i>
-                            </span>
+                            <div>
+                                <span class="cursor text p-4" @click="updateTaskName(index)">
+                                    <i class="fa-solid fa-file-pen" style="color: #2307f2;"></i>
+                                </span>
+                                <span class="cursor text-danger" @click="deletedTask(index)">
+                                    <i class="fa-solid fa-trash"></i>
+                                </span>
+                            </div>
                         </li>
                     </ul>
                 </div>

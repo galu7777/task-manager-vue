@@ -65,3 +65,31 @@ export const deletedTaskSuccessSwal = () => {
         }
     })  
 }
+
+export const updateTaskNameSwal = (index) => {
+    console.log()
+    Swal.fire({
+        title: 'Actualizar esta tarea ',
+        input: 'text',
+        inputAttributes: {
+          autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: 'Actualizar',
+        showLoaderOnConfirm: true,
+        preConfirm: (nameTaskNew) => {
+            store.state.nameTaskNew = nameTaskNew
+            store.dispatch('reNameTask', index)
+                
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Modificacion fue Exitosa!',
+            'Tu tarea fue registrada exitosamente.',
+            'success'
+            )
+        }
+      })
+}
