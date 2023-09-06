@@ -2,58 +2,60 @@
     export default {
         data() {
             return {
-                user: {
-                    nick_name: '',
-                    password: ''
-                }
+              user: {
+                nick_name: '',
+                email: '',
+                password: ''
+              }
             }
         },
         methods: {
-            async isLogin() {
+            async sigUp(){
                 try {
-                    await this.$store.dispatch('isLogin', this.user)
-                    this.$router.push('/home')
-                    this.user = {}
+                    console.log(this.user)
+                    await this.$store.dispatch('sigUp', this.user)
+                    this.$route.push('/login')
+                    // this.user = {}
                 } catch (error) {
-                    console.log('Error:', error)
+                    console.log('error: ', error)
                 }
             }
         }
-    }
+    }    
 </script>
 
 <template>
     <div class="container w-75 mt-5 bg-container rounded">
         <div class="row align-items-stretch">
-            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
+            <div class="col bg-registro d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded">
 
             </div>
             <div class="col p-5 rounded-end">
                 <div class="text-end">
                     <img src="../assets/check.png" width="48" alt="">
                 </div>
-                <h2 class="fw-bold text-center py-5">Bienvenido</h2>
+                <h2 class="fw-bold text-center py-5">Registrarse</h2>
                     <!--- login --->
                 <form action="">
                     <div class="mb-4">
-                        <label for="text" class="form-label">Nombre de Usuario</label>
-                        <input id="text" v-model="user.nick_name" type="text" class="form-control" name="email">
+                        <label for="text" class="form-label">User Name</label>
+                        <input id="text" v-model="user.nick_name" type="text" class="form-control" name="nick_name">
                     </div>
                     <div class="mb-4">
-                        <label for="password" class="form-label">Contraseña</label>
+                        <label for="email" class="form-label">Email</label>
+                        <input id="email" v-model="user.email" type="email" class="form-control" name="email">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
                         <input id="password" v-model="user.password" type="password" class="form-control" name="password">
                     </div>
-                    <!-- <div class="mb-4 form-check">
-                        <input type="checkbox" name="connected" class="form-check-input" id="">
-                        <label for="connected" class="form-check-label">Mantenerme conectado</label>
-                    </div> -->
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary" @click.prevent="isLogin">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="sigUp">Registrarme</button>
                     </div>
                     
                     <div class="my-3 row">
-                        <span>No tienes cuenta ? <router-link to="/register">Registrate</router-link></span>
+                        <span>Ya tienes una cuenta ? <router-link to="/login">Iniciar Sesion</router-link></span>
                         <span><a href="#">Recuperar Password</a></span>
                     </div>
                     <!-- redes sociales -->
@@ -104,8 +106,8 @@
     a {
         text-decoration: none;
     }
-    .bg{
-        background-image: url('../assets/office.jpg');
+    .bg-registro{
+        background-image: url('../assets/register.jpg');
         background-position: center center;
     }
     .bg-container{
