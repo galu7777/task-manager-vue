@@ -41,7 +41,7 @@
                 <input 
                     type="text" 
                     class="form-control form-control-lg"
-                    placeholder="Ingresar Tarea..."
+                    placeholder="Ingresar una Tarea..."
                     v-model="nameTask"
                     @keyup.enter="addTask"
                 >
