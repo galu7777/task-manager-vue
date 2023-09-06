@@ -37,11 +37,11 @@
                 <form action="">
                     <div class="mb-4">
                         <label for="text" class="form-label">Nombre de Usuario</label>
-                        <input v-model="user.nick_name" type="text" class="form-control" name="email">
+                        <input id="text" v-model="user.nick_name" type="text" class="form-control" name="email">
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input v-model="user.password" type="password" class="form-control" name="password">
+                        <input id="password" v-model="user.password" type="password" class="form-control" name="password">
                     </div>
                     <!-- <div class="mb-4 form-check">
                         <input type="checkbox" name="connected" class="form-check-input" id="">
