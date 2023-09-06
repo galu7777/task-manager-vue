@@ -5,6 +5,7 @@ export default createStore({
   state: {
     Tasks: [],
     TasksSuccess: [],
+    taskDeleted: null,
     nameTask: null,
     isUserLoggedIn: false,
     user: null,
@@ -30,14 +31,15 @@ export default createStore({
     },
     async deletedTask(state, index) {
       const task = state.Tasks.splice(index, 1);
+      state.taskDeleted = task[0].name
       const token = state.token
       const resp = await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      console.log(resp.data)
     },
     async deletedTaskSuccess(state, index) {
       const task = state.TasksSuccess.splice(index, 1);
+      state.taskDeleted = task[0].name
       const token = state.token
       const resp = await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
@@ -68,7 +70,7 @@ export default createStore({
       console.log(resp.data.state)
     },
     async isLogin(state, user){
-      try {
+      // try {
         const resp = await axios.post('http://localhost:3333/login', user)
         const token = resp.data.token
         state.token = token
@@ -79,15 +81,19 @@ export default createStore({
         const tasksPeding = userFound[0].task.filter((data) => data.state === 'pending')
         const tasksSuccess = userFound[0].task.filter((data) => data.state === 'done')
         state.user = userFound
-        if(tasksPeding) state.Tasks = tasksPeding
-        if(taskSuccess) state.TasksSuccess = tasksSuccess
-      } catch (error) {
-        console.log('error: ', error)
-      }
+        state.Tasks = tasksPeding
+        state.TasksSuccess = tasksSuccess
+      // } catch (error) {
+      //   console.log('error: ', error)
+      // }
     },
     isLogout(state){
       state.token = ''
-      console.log(state.token)
+    },
+    async sigUp(state, user){
+      console.log(user)
+      const resp = await axios.post('http://localhost:3333/users', user)
+      console.log(resp.data)
     }
   },
   actions: {
@@ -111,6 +117,9 @@ export default createStore({
     },
     isLogout(context) {
       context.commit('isLogout')
+    },
+    sigUp(context, user) {
+      context.commit('sigUp', user)
     }
   }
 });
