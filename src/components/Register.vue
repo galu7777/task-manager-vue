@@ -1,5 +1,27 @@
 <script>
-    
+    export default {
+        data() {
+            return {
+              user: {
+                nick_name: '',
+                email: '',
+                password: ''
+              }
+            }
+        },
+        methods: {
+            async sigUp(){
+                try {
+                    console.log(this.user)
+                    await this.$store.dispatch('sigUp', this.user)
+                    this.$route.push('/login')
+                    // this.user = {}
+                } catch (error) {
+                    console.log('error: ', error)
+                }
+            }
+        }
+    }    
 </script>
 
 <template>
@@ -16,20 +38,20 @@
                     <!--- login --->
                 <form action="">
                     <div class="mb-4">
-                        <label for="email" class="form-label">User Name</label>
-                        <input type="email" class="form-control" name="email">
+                        <label for="text" class="form-label">User Name</label>
+                        <input id="text" v-model="user.nick_name" type="text" class="form-control" name="nick_name">
                     </div>
                     <div class="mb-4">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email">
+                        <input id="email" v-model="user.email" type="email" class="form-control" name="email">
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <input id="password" v-model="user.password" type="password" class="form-control" name="password">
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Registrarme</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="sigUp">Registrarme</button>
                     </div>
                     
                     <div class="my-3 row">
