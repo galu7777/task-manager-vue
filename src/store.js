@@ -7,6 +7,7 @@ export default createStore({
     TasksSuccess: [],
     taskDeleted: null,
     nameTask: null,
+    nameTaskNew: null,
     isUserLoggedIn: false,
     user: null,
     token: ''
@@ -26,7 +27,6 @@ export default createStore({
         headers: { 'Authorization': `Bearer ${token}` }
       })
       state.Tasks.push(resp.data)
-      console.log(state.Tasks)
       // state.Tasks.push(resp.data)
     },
     async deletedTask(state, index) {
@@ -44,7 +44,16 @@ export default createStore({
       const resp = await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      console.log(resp.data)
+    },
+    async reNameTask (state, index){
+        const task = state.Tasks[index]
+        const data = { name: state.nameTaskNew }
+        const token = state.token
+        const resp = await axios.put(`http://localhost:3333/tasks/${task.id}`, data, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        state.Tasks.splice(index, 1)
+        state.Tasks.push(resp.data)
     },
     async updateTask(state, index){
         const task = state.Tasks[index]
@@ -67,7 +76,6 @@ export default createStore({
       const taskSuccess = state.TasksSuccess[index]
       state.Tasks.push(taskSuccess)
       state.TasksSuccess.splice(index, 1)
-      console.log(resp.data.state)
     },
     async isLogin(state, user){
       // try {
@@ -105,6 +113,9 @@ export default createStore({
     },
     deletedTaskSuccessAction(context) {
         context.commit('deletedTaskSuccess');
+    },
+    reNameTask(context, index) {
+      context.commit('reNameTask', index)
     },
     updateTaskAction(context, index) {
       context.commit('updateTask', index)
