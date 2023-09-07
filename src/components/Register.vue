@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary" @click="sigup">Registrarme</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="sigup">Registrarme</button>
                     </div>
                     
                     <div class="my-3 row">
