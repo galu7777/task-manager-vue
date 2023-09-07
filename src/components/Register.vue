@@ -1,27 +1,26 @@
 <script>
+    import { sigUpSwal } from '../helpers/modalSwal.js'
     export default {
         data() {
             return {
-              user: {
-                nick_name: '',
-                email: '',
-                password: ''
-              }
+                user: {
+                    nick_name: '',
+                    email: '',
+                    password: ''
+                }
             }
         },
         methods: {
-            async sigUp(){
-                try {
-                    console.log(this.user)
-                    await this.$store.dispatch('sigUp', this.user)
-                    this.$route.push('/login')
+            async sigup() {
+                    sigUpSwal(this.user)
+                    // await this.$store.state.dispatch('sigUp')
+                    // console.log(this.user)
+                    // this.$router.push('/login')
                     // this.user = {}
-                } catch (error) {
-                    console.log('error: ', error)
-                }
+                
             }
         }
-    }    
+    }
 </script>
 
 <template>
@@ -51,7 +50,7 @@
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary" @click.prevent="sigUp">Registrarme</button>
+                        <button type="submit" class="btn btn-primary" @click="sigup">Registrarme</button>
                     </div>
                     
                     <div class="my-3 row">
