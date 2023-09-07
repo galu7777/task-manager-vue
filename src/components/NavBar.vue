@@ -1,7 +1,7 @@
 <script>
     export default {
         methods: {
-            isLogout() {
+            logout() {
                 this.$store.dispatch('isLogout')
                 this.$router.push('/login')
             }
@@ -17,7 +17,7 @@
                     <span class="navbar-brand mb-0 h1">Tasks Manager App</span>
                 </div>
                 <div>
-                    <span class="cursor text-danger" @click="isLogout">
+                    <span class="cursor text-danger" @click="logout">
                         <i class="fa-solid fa-right-from-bracket fa-size"></i>
                     </span>
                 </div>
