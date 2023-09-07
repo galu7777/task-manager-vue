@@ -93,3 +93,26 @@ export const updateTaskNameSwal = (index) => {
         }
       })
 }
+
+export const sigUpSwal = (user) => {
+    const newUser = user
+    store.state.newUser = user
+    Swal.fire({
+        title: 'Registrar Nuevo Usuario',
+        text: `Deseas registrarte como "${newUser.nick_name}"`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Registrar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            store.dispatch('userRegister')
+            Swal.fire(
+            'Registro Exitoso!',
+            'Tu Usuario fue registrado exitosamente.',
+            'success'
+            )
+        }
+    })
+}
