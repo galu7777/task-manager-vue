@@ -12,12 +12,7 @@
         },
         methods: {
             async sigup() {
-                    sigUpSwal(this.user)
-                    // await this.$store.state.dispatch('sigUp')
-                    // console.log(this.user)
-                    // this.$router.push('/login')
-                    // this.user = {}
-                
+                   sigUpSwal(this.user)                
             }
         }
     }
