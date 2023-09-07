@@ -9,7 +9,7 @@
             }
         },
         methods: {
-            async isLogin() {
+            async login() {
                 try {
                     await this.$store.dispatch('isLogin', this.user)
                     this.$router.push('/home')
@@ -49,7 +49,7 @@
                     </div> -->
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-primary" @click.prevent="isLogin">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="login">Iniciar Sesión</button>
                     </div>
                     
                     <div class="my-3 row">
