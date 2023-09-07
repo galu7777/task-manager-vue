@@ -1,5 +1,15 @@
 import { createStore } from 'vuex'
-import axios from 'axios'
+import { 
+  addtask, 
+  userregister, 
+  deletedtask, 
+  deletedtasksuccess, 
+  renametask, 
+  updatetask, 
+  updatetasksuccess, 
+  logout, 
+  islogin 
+} from './helpers/storeHelpers'
 
 export default createStore({
   state: {
@@ -14,100 +24,32 @@ export default createStore({
     token: ''
   },
   mutations: {
-    async addTask(state) {
-      const id = String(state.user[0].id)
-      const task = {
-        userId: id,
-        name: state.nameTask,
-        state: 'pending',
-        color: '#fff',
-        limitAt: "2023-08-24T19:05:13.519-04:00"
-      };
-      const token = state.token
-      const resp = await axios.post('http://localhost:3333/tasks', task, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      state.Tasks.push(resp.data)
-      // state.Tasks.push(resp.data)
+    addTask(state) {
+        addtask(state)
     },
-    async userRegister(state){
-      const data = {
-        nick_name: state.newUser.nick_name,
-        email: state.newUser.email,
-        password: state.newUser.password
-      }
-      console.log(data)
-      await axios.post('http://localhost:3333/users', data)
+    userRegister(state){
+      userregister(state)
     },
-    async deletedTask(state, index) {
-      const task = state.Tasks.splice(index, 1);
-      state.taskDeleted = task[0].name
-      const token = state.token
-      const resp = await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
+    deletedTask(state, index) {
+      deletedtask(state, index)
     },
-    async deletedTaskSuccess(state, index) {
-      const task = state.TasksSuccess.splice(index, 1);
-      state.taskDeleted = task[0].name
-      const token = state.token
-      const resp = await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
+    deletedTaskSuccess(state, index) {
+      deletedtasksuccess(state, index)
     },
-    async reNameTask (state, index){
-        const task = state.Tasks[index]
-        const data = { name: state.nameTaskNew }
-        const token = state.token
-        const resp = await axios.put(`http://localhost:3333/tasks/${task.id}`, data, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        state.Tasks.splice(index, 1)
-        state.Tasks.push(resp.data)
+    reNameTask (state, index){
+      renametask(state, index) 
     },
-    async updateTask(state, index){
-        const task = state.Tasks[index]
-        const data = { state: 'done' }
-        const token = state.token
-        const resp = await axios.put(`http://localhost:3333/tasks/${task.id}`, data, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        console.log(resp.data.state)
-        state.TasksSuccess.push(task)
-        state.Tasks.splice(index, 1)
+    updateTask(state, index){
+      updatetask(state, index)
     },
-    async updateTasksSuccess(state, index) {
-      const task = state.TasksSuccess[index]
-      const data = { state: 'pending' }
-        const token = state.token
-        const resp = await axios.put(`http://localhost:3333/tasks/${task.id}`, data, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-      const taskSuccess = state.TasksSuccess[index]
-      state.Tasks.push(taskSuccess)
-      state.TasksSuccess.splice(index, 1)
+    updateTasksSuccess(state, index) {
+      updatetasksuccess(state, index)
     },
-    async isLogin(state, user){
-      // try {
-        const resp = await axios.post('http://localhost:3333/login', user)
-        const token = resp.data.token
-        state.token = token
-        const client = await axios('http://localhost:3333/users', {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        const userFound = client.data.filter((data) => data.nickName === user.nick_name)
-        const tasksPeding = userFound[0].task.filter((data) => data.state === 'pending')
-        const tasksSuccess = userFound[0].task.filter((data) => data.state === 'done')
-        state.user = userFound
-        state.Tasks = tasksPeding
-        state.TasksSuccess = tasksSuccess
-        console.log(client.data)
-      // } catch (error) {
-      //   console.log('error: ', error)
-      // }
+    isLogin(state, user){
+      islogin(state, user)
     },
     isLogout(state){
-      state.token = ''
+      logout(state)
     }
     
   },

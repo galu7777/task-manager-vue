@@ -12,7 +12,6 @@
             async login() {
                 try {
                     await this.$store.dispatch('isLogin', this.user)
-                    this.$router.push('/home')
                     this.user = {}
                 } catch (error) {
                     console.log('Error:', error)
