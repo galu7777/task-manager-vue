@@ -10,6 +10,7 @@ export default createStore({
     nameTaskNew: null,
     isUserLoggedIn: false,
     user: null,
+    newUser: null,
     token: ''
   },
   mutations: {
@@ -28,6 +29,15 @@ export default createStore({
       })
       state.Tasks.push(resp.data)
       // state.Tasks.push(resp.data)
+    },
+    async userRegister(state){
+      const data = {
+        nick_name: state.newUser.nick_name,
+        email: state.newUser.email,
+        password: state.newUser.password
+      }
+      console.log(data)
+      await axios.post('http://localhost:3333/users', data)
     },
     async deletedTask(state, index) {
       const task = state.Tasks.splice(index, 1);
@@ -91,18 +101,15 @@ export default createStore({
         state.user = userFound
         state.Tasks = tasksPeding
         state.TasksSuccess = tasksSuccess
+        console.log(client.data)
       // } catch (error) {
       //   console.log('error: ', error)
       // }
     },
     isLogout(state){
       state.token = ''
-    },
-    async sigUp(state, user){
-      console.log(user)
-      const resp = await axios.post('http://localhost:3333/users', user)
-      console.log(resp.data)
     }
+    
   },
   actions: {
     addTaskAction(context) {
@@ -129,8 +136,8 @@ export default createStore({
     isLogout(context) {
       context.commit('isLogout')
     },
-    sigUp(context, user) {
-      context.commit('sigUp', user)
+    userRegister(context) {
+      context.commit('userRegister')
     }
   }
 });
