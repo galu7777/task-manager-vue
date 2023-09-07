@@ -1,8 +1,24 @@
 import Swal from 'sweetalert2'
 import store from '../store'
 
+export const login = (user) => {
+    const name = user.nick_name
+    Swal.fire({
+        title: `Bienvenido "${name}"`,
+      })
+}
+
+export const errorSwal = (msg) => {
+     Swal.fire({
+        title: `Ooops a ocurrido un error`,
+        text: `${msg}`,
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+     })
+}
+
 export const addTaskSwal = (task) => {
-    const nameTask = task
+    let nameTask = task
     Swal.fire({
         title: 'Registrar Tarea',
         text: `Deseas agregar esta tarea "${nameTask}"`,
