@@ -1,4 +1,5 @@
 <script>
+    import { login, errorSwal } from '../helpers/modalSwal'
     export default {
         data() {
             return {
@@ -10,10 +11,18 @@
         },
         methods: {
             async login() {
-                try {
-                    await this.$store.dispatch('isLogin', this.user)
-                    this.user = {}
-                } catch (error) {
+                try {                    
+                    if(this.user.password.length < 4) {
+                        errorSwal('La password no puede estar vacia')
+                    } 
+                    else if (this.user.nick_name.length < 4 || this.user.nick_name === '' ) {
+                        errorSwal('El nombre de ususario no puede estar vacio')
+                    } else {
+                        await this.$store.dispatch('isLogin', this.user)
+                        login(this.user)
+                        this.user = {}
+                    }
+                } catch (error) {                    
                     console.log('Error:', error)
                 }
             }
