@@ -5,7 +5,9 @@
         data(){
             return {
                 nameTask: '',
-                task: null
+                task: null,
+                tasksPending: [],
+                tasksSuccess: []
             }
         },
         methods: {
@@ -30,6 +32,14 @@
                 this.$store.dispatch('updateTasksSuccess', index)
             }
             
+        },
+        created() {
+            if(localStorage.tasksPending) {
+                this.tasksPending = JSON.parse(localStorage.tasksPending)
+            }
+            if(localStorage.tasksSuccess) {
+                this.tasksSuccess = JSON.parse(localStorage.tasksSuccess)
+            }
         }
     }
 </script>
@@ -55,7 +65,7 @@
                     <h2 class="title">Tareas Pendientes</h2>
                     <div class="card p-2" v-if="$store.state.Tasks.length === 0">
                         <h6>No hay tareas pendientes para mostrar</h6>
-                    </div>
+                    </div>                   -->
                     <ul class="list-group" v-for="(task, index) in $store.state.Tasks" :key="index">
                         <li class="list-group-item d-flex justify-content-between">
                             <span :class="['text', 'cursor']" @click="updateTask(index)">
