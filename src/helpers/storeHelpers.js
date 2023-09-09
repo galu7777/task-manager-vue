@@ -15,7 +15,8 @@ export const addtask = async (state) => {
         const resp = await axios.post('http://localhost:3333/tasks', task, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
-        state.Tasks.push(resp.data)        
+        state.Tasks.push(resp.data)
+        localStorage.tasksPending = JSON.stringify(state.Tasks)        
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -44,6 +45,7 @@ export const deletedtask = async (state, index) => {
         await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
+        localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -57,6 +59,7 @@ export const deletedtasksuccess = async (state, index) => {
         await axios.delete(`http://localhost:3333/tasks/${task[0].id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
+        localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -72,6 +75,7 @@ export const renametask = async (state, index) => {
         })
         state.Tasks.splice(index, 1)
         state.Tasks.push(resp.data)
+        localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -87,7 +91,9 @@ export const updatetask = async (state, index) => {
         })
         console.log(resp.data.state)
         state.TasksSuccess.push(task)
+        localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
         state.Tasks.splice(index, 1)
+        localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -103,7 +109,9 @@ export const updatetasksuccess = async (state, index) => {
             })
         const taskSuccess = state.TasksSuccess[index]
         state.Tasks.push(taskSuccess)
+        localStorage.tasksPending = JSON.stringify(state.Tasks)
         state.TasksSuccess.splice(index, 1)
+        localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -115,13 +123,16 @@ export const islogin = async (state, user) => {
         const token = resp.data.token
         state.token = token
         const client = await axios('http://localhost:3333/users', {
-          headers: { 'Authorization': `Bearer ${token}` }
+            headers: { 'Authorization': `Bearer ${token}` }
         })
         const userFound = client.data.filter((data) => data.nickName === user.nick_name)
-        const tasksPeding = userFound[0].task.filter((data) => data.state === 'pending')
+        const tasksPending = userFound[0].task.filter((data) => data.state === 'pending')
         const tasksSuccess = userFound[0].task.filter((data) => data.state === 'done')
+        localStorage.token = JSON.stringify(token)
+        localStorage.tasksPending = JSON.stringify(tasksPending)
+        localStorage.tasksSuccess = JSON.stringify(tasksSuccess)
         state.user = userFound
-        state.Tasks = tasksPeding
+        state.Tasks = tasksPending
         state.TasksSuccess = tasksSuccess
         router.push('/home')
         console.log(client.data)
