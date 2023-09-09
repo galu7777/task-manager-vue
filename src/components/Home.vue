@@ -1,16 +1,26 @@
-<script setup>
-import Navbar from './NavBar.vue'
-import Task from './Task.vue'
+<script>
+  import Navbar from './NavBar.vue'
+  import Task from './Task.vue'
 
-const navBar = Navbar
-// export default {
-//   name: 'App',
-//   components: {
-//     navBar: Navbar,
-//     Task
-//   }
-// }
-
+  // const navBar = Navbar
+  export default {
+    name: 'App',
+    components: {
+      navBar: Navbar,
+      Task
+    },
+    created() {
+      if (localStorage.token) {
+      this.$store.state.token = JSON.parse(localStorage.token);
+      }
+      if (localStorage.tasksPending) {
+        this.$store.state.Tasks = JSON.parse(localStorage.tasksPending);
+      }
+      if (localStorage.tasksSuccess) {
+        this.$store.state.TasksSuccess = JSON.parse(localStorage.tasksSuccess);
+      }
+    }
+  }
 </script>
 
 <template>
