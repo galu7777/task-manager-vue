@@ -15,11 +15,11 @@
                 addTaskSwal(this.nameTask)
                 this.nameTask = ''               
             },
-            deletedTask() {
-                deletedTaskSwal()
+            deletedTask(index) {
+                deletedTaskSwal(index)
             },
-            deletedTaskSuccess() {
-                deletedTaskSuccessSwal()              
+            deletedTaskSuccess(index) {
+                deletedTaskSuccessSwal(index)              
             },
             updateTaskName(index){
                 updateTaskNameSwal(index)

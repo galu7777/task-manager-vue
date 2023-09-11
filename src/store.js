@@ -1,15 +1,13 @@
 import { createStore } from 'vuex'
 import { 
-  addtask, 
-  userregister, 
+  addtask,   
   deletedtask, 
   deletedtasksuccess, 
   renametask, 
   updatetask, 
-  updatetasksuccess, 
-  logout, 
-  islogin 
-} from './helpers/storeHelpers'
+  updatetasksuccess   
+} from './helpers/storeHelpersTasks'
+import { userregister, islogin, logout } from './helpers/storeHelpersUsers'
 
 export default createStore({
   state: {
@@ -60,8 +58,8 @@ export default createStore({
     deletedTaskAction(context, index) {
       context.commit('deletedTask', index);
     },
-    deletedTaskSuccessAction(context) {
-        context.commit('deletedTaskSuccess');
+    deletedTaskSuccessAction(context, index) {
+        context.commit('deletedTaskSuccess', index);
     },
     reNameTask(context, index) {
       context.commit('reNameTask', index)
