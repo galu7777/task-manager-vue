@@ -41,7 +41,7 @@ export const addTaskSwal = (task) => {
     })
 }
 
-export const deletedTaskSwal = () => {
+export const deletedTaskSwal = (index) => {
     Swal.fire({
         title: 'Eliminar Tarea',
         text: `Deseas eliminar esta tarea`,
@@ -52,7 +52,7 @@ export const deletedTaskSwal = () => {
         confirmButtonText: 'Eliminar'
     }).then((result) => {
         if (result.isConfirmed) {
-            store.dispatch('deletedTaskAction')
+            store.dispatch('deletedTaskAction', index)
             Swal.fire(
             'Tarea Eliminada!',
             `La tarea "${store.state.taskDeleted}" fue eliminada exitosamente.`,
@@ -61,7 +61,7 @@ export const deletedTaskSwal = () => {
         }
     })
 }
-export const deletedTaskSuccessSwal = () => {
+export const deletedTaskSuccessSwal = (index) => {
     Swal.fire({
         title: 'Eliminar Tarea',
         text: `Deseas eliminar esta tarea`,
@@ -72,7 +72,7 @@ export const deletedTaskSuccessSwal = () => {
         confirmButtonText: 'Eliminar'
     }).then((result) => {
         if (result.isConfirmed) {
-            store.dispatch('deletedTaskSuccessAction')
+            store.dispatch('deletedTaskSuccessAction', index)
             Swal.fire(
             'Tarea Eliminada!',
             `La tarea "${store.state.taskDeleted}" fue eliminada exitosamente.`,
