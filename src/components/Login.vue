@@ -44,7 +44,7 @@
                     <!--- login --->
                 <form action="">
                     <div class="mb-4">
-                        <label for="text" class="form-label">Nombre de Usuario</label>
+                        <label for="text" class="form-label">Nombre de Usuario / Correo Electronico</label>
                         <input id="text" v-model="user.nick_name" type="text" class="form-control" name="email">
                     </div>
                     <div class="mb-4">
