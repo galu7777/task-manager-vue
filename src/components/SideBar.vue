@@ -32,7 +32,7 @@
         <!-- Puedes agregar más elementos aquí -->        
       </ul>
       <div class="container-fluid center">
-          <button @click="" class="btn btn-primary">Ocultar Sidebar</button>
+          <button @click="toggleSidebar" class="btn btn-primary">Ocultar Sidebar</button>
           <span class="cursor text-danger" @click.prevent="logout">
               <i class="fa-solid fa-right-from-bracket fa-size"></i>
           </span>
