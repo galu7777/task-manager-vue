@@ -7,7 +7,15 @@ const api = axios.create({
 })
 
 export const apiLogin = (user) => {
-    return api.post('/login', user)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    const emailValidate = emailRegex.test(user.nick_name)
+    if(emailValidate) {
+        const data = { 
+            email: user.nick_name,
+            password: user.password
+         }
+         return api.post('/login', data)
+    } else return api.post('/login', user)
 }
 
 export const apiGetUsers = (token) => {

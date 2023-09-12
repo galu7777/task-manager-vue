@@ -22,7 +22,7 @@ export const islogin = async (state, user) => {
         const token = resp.data.token
         state.token = token
         const client = await apiGetUsers(token)
-        const userFound = client.data.filter((data) => data.nickName === user.nick_name)
+        const userFound = client.data.filter((data) => data.nickName === user.nick_name || data.email === user.nick_name)
         const tasksPending = userFound[0].task.filter((data) => data.state === 'pending')
         const tasksSuccess = userFound[0].task.filter((data) => data.state === 'done')
         localStorage.token = JSON.stringify(token)
