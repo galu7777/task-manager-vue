@@ -26,9 +26,16 @@
     <div :class="{ 'sidebar-open': isSidebarOpen }" class="sidebar bg-dark text-white z">
       <!-- Contenido del Sidebar con clases de Bootstrap -->
       <ul class="list-group">
-        <li class="list-group-item">Elemento 1</li>
-        <li class="list-group-item">Elemento 2</li>
-        <li class="list-group-item">Elemento 3</li>
+        <span class="cursor">          
+          <router-link to="/home" class="list-group-item">
+            <i class="fa-solid fa-house fa-size-md" style="color: #1667f3;"></i> Home
+          </router-link>
+        </span>
+        <span>
+          <router-link to="/config" class="list-group-item">
+            <i class="fa-solid fa-gear fa-size-md" style="color: #1667f3;"></i> Configuraciones
+          </router-link>
+        </span>
         <!-- Puedes agregar más elementos aquí -->        
       </ul>
       <div class="container-fluid center">
@@ -68,5 +75,9 @@
   }
   .fa-size {
     font-size :2em;
+  }
+
+  .fa-size-md {
+    font-size :1.4em;
   }
 </style>
