@@ -10,9 +10,8 @@ export const apiLogin = (user) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const emailValidate = emailRegex.test(user.nick_name)
     if(emailValidate) {
-        const nick = user.nick_name.toLowerCase() 
         const data = { 
-            email: nick,
+            email: user.nick_name,
             password: user.password
          }
          return api.post('/login', data)
