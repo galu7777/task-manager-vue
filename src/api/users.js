@@ -10,18 +10,19 @@ export const apiLogin = (user) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
     const emailValidate = emailRegex.test(user.nick_name)
     if(emailValidate) {
+        const nick = user.nick_name.toLowerCase() 
         const data = { 
-            email: user.nick_name,
+            email: nick,
             password: user.password
          }
          return api.post('/login', data)
     } else return api.post('/login', user)
 }
 
-export const apiGetUsers = (token) => {
-    return api.get('/users', { headers: { 'Authorization': `Bearer ${token}` }})
+export const apiGetUserTasks = (token) => {
+    return api.get('/tasks', { headers: { 'Authorization': `Bearer ${token}` }})
 }
 
 export const apiPostUser = (user) => {
-    return api.post('/users', user);
+    return api.post('/user', user);
 }
