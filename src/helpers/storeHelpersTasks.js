@@ -2,12 +2,7 @@ import { apiDeleteTask, apiPostTask, apiPutTask, apiPutStateTask } from '../api/
 
 export const addtask = async (state) => {
     try {
-        const task = {
-            name: state.nameTask,
-            state: 'pending',
-            color: '#fff',
-            limitAt: "2023-08-24T19:05:13.519-04:00"
-        }
+        const task = { name: state.nameTask }
         const token = state.token
         const resp = await apiPostTask(task, token)
         state.Tasks.push(resp.data.data)
