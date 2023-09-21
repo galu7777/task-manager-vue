@@ -2,9 +2,7 @@ import { apiDeleteTask, apiPostTask, apiPutTask, apiPutStateTask } from '../api/
 
 export const addtask = async (state) => {
     try {
-        const id = String(state.user[0].id)
         const task = {
-            userId: id,
             name: state.nameTask,
             state: 'pending',
             color: '#fff',
@@ -12,7 +10,7 @@ export const addtask = async (state) => {
         }
         const token = state.token
         const resp = await apiPostTask(task, token)
-        state.Tasks.push(resp.data)
+        state.Tasks.push(resp.data.data)
         localStorage.tasksPending = JSON.stringify(state.Tasks)        
     } catch (error) {
         console.log('Error: ', error)
@@ -50,7 +48,7 @@ export const renametask = async (state, index) => {
         const token = state.token
         const resp = await apiPutTask(id, data, token)
         state.Tasks.splice(index, 1)
-        state.Tasks.push(resp.data)
+        state.Tasks.push(resp.data.data)
         localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
