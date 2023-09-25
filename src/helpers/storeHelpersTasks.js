@@ -1,4 +1,6 @@
 import { apiDeleteTask, apiPostTask, apiPutTask, apiPutStateTask } from '../api/tasks'
+import { apiGetUserTasks } from '../api/users'
+import store from '../store'
 
 export const addtask = async (state) => {
     try {
@@ -77,6 +79,18 @@ export const updatetasksuccess = async (state, index) => {
         localStorage.tasksPending = JSON.stringify(state.Tasks)
         state.TasksSuccess.splice(index, 1)
         localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
+    } catch (error) {
+        console.log('Error: ', error)
+    }
+}
+
+export const reTaskInDashboard = async (token) => {
+    try {
+        const client = await apiGetUserTasks(token)
+        const tasksPending = client.data.data.tasks.filter((data) => data.state === 'pending')
+        const tasksSuccess =client.data.data.tasks.filter((data) => data.state === 'done')
+        store.state.Tasks = tasksPending
+        store.state.TasksSuccess = tasksSuccess
     } catch (error) {
         console.log('Error: ', error)
     }
