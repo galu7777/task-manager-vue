@@ -1,5 +1,5 @@
 <script>
-    import { login, errorSwal } from '../helpers/modalSwal'
+    import { errorSwal } from '../helpers/modalSwal'
     export default {
         data() {
             return {
@@ -19,7 +19,6 @@
                         errorSwal('El nombre de ususario no puede estar vacio')
                     } else {
                         await this.$store.dispatch('isLogin', this.user)
-                        login(this.user)
                         this.user = {}
                     }
                 } catch (error) {                    
