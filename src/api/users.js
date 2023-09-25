@@ -25,3 +25,7 @@ export const apiGetUserTasks = (token) => {
 export const apiPostUser = (user) => {
     return api.post('/user', user);
 }
+
+export const getUser = (token) => {
+    return api.get('/user', { headers: { 'Authorization': `Bearer ${token}` } })
+}
