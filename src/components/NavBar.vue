@@ -1,10 +1,14 @@
 <script>
+    import SideBar from './SideBar.vue'
     export default {
         methods: {
             logout() {
                 this.$store.dispatch('isLogout')
             }
-        }
+        },
+        components: {
+            sideBar: SideBar,
+        },
     }
 </script>
 <template>
@@ -13,16 +17,14 @@
             <div class="container-fluid">
                 <div class="ctn">
                     <img src="../assets/check.png" alt="check" class="img">
-                    <span class="navbar-brand mb-0 h1">Tasks Manager App</span>
-                </div>
+                    <span class="navbar-brand mb-0 h1">Tasks Manager App</span>                    
+                </div>                
                 <div>
-                    <span class="cursor text-danger" @click.prevent="logout">
-                        <i class="fa-solid fa-right-from-bracket fa-size"></i>
-                    </span>
+                    <sideBar />
                 </div>
             </div>
-        </nav>
-    </div>
+        </nav>        
+    </div>    
 </template>
 
 <style>
@@ -34,8 +36,5 @@
     .img {
         height: 2rem;
         margin-right: 5px;
-    }
-    .fa-size {
-        font-size :2em;
     }
 </style>

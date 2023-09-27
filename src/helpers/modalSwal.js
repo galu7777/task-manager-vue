@@ -2,9 +2,17 @@ import Swal from 'sweetalert2'
 import store from '../store'
 
 export const login = (user) => {
-    const name = user.nick_name
+    const name = user.data.user.nick_name
     Swal.fire({
         title: `Bienvenido "${name}"`,
+      })
+}
+
+export const loginError = () => {
+    Swal.fire({
+        title: `Credenciales Invalidas`,
+        text: 'Verifica que tu "contraseña", "nombre de usuario" o "email" sean los correctos',
+        icon: 'error'
       })
 }
 

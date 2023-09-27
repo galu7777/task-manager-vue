@@ -1,5 +1,5 @@
 <script>
-    import { login, errorSwal } from '../helpers/modalSwal'
+    import { errorSwal } from '../helpers/modalSwal'
     export default {
         data() {
             return {
@@ -19,7 +19,6 @@
                         errorSwal('El nombre de ususario no puede estar vacio')
                     } else {
                         await this.$store.dispatch('isLogin', this.user)
-                        login(this.user)
                         this.user = {}
                     }
                 } catch (error) {                    
@@ -44,7 +43,7 @@
                     <!--- login --->
                 <form action="">
                     <div class="mb-4">
-                        <label for="text" class="form-label">Nombre de Usuario</label>
+                        <label for="text" class="form-label">Nombre de Usuario / Correo Electronico</label>
                         <input id="text" v-model="user.nick_name" type="text" class="form-control" name="email">
                     </div>
                     <div class="mb-4">
