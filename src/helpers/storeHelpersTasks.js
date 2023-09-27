@@ -7,8 +7,7 @@ export const addtask = async (state) => {
         const task = { name: state.nameTask }
         const token = state.token
         const resp = await apiPostTask(task, token)
-        state.Tasks.push(resp.data.data)
-        localStorage.tasksPending = JSON.stringify(state.Tasks)        
+        state.Tasks.push(resp.data.data)       
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -20,7 +19,6 @@ export const deletedtask = async (state, index) => {
         state.taskDeleted = task[0].name
         const token = state.token
         await apiDeleteTask(task, token)
-        localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -32,7 +30,6 @@ export const deletedtasksuccess = async (state, index) => {
         state.taskDeleted = task[0].name
         const token = state.token
         await apiDeleteTask(task, token)
-        localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -46,7 +43,6 @@ export const renametask = async (state, index) => {
         const resp = await apiPutTask(id, data, token)
         state.Tasks.splice(index, 1)
         state.Tasks.push(resp.data.data)
-        localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -60,9 +56,7 @@ export const updatetask = async (state, index) => {
         const token = state.token
         await apiPutStateTask(id, data, token)
         state.TasksSuccess.push(task)
-        localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
         state.Tasks.splice(index, 1)
-        localStorage.tasksPending = JSON.stringify(state.Tasks)
     } catch (error) {
         console.log('Error: ', error)
     }
@@ -76,9 +70,7 @@ export const updatetasksuccess = async (state, index) => {
         await apiPutStateTask(id, data, token)
         const taskSuccess = state.TasksSuccess[index]
         state.Tasks.push(taskSuccess)
-        localStorage.tasksPending = JSON.stringify(state.Tasks)
         state.TasksSuccess.splice(index, 1)
-        localStorage.tasksSuccess = JSON.stringify(state.TasksSuccess)
     } catch (error) {
         console.log('Error: ', error)
     }
