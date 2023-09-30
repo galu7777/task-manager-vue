@@ -28,3 +28,7 @@ input {
   .text {
     color: black;
   }
+
+  .mt-18 {
+    margin-top: 90px !important;
+  }
