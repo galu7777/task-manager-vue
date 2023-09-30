@@ -20,7 +20,7 @@ export const userregister = async (state) => {
 export const islogin = async (state, user) => {
     try {
         const resp = await apiLogin(user)
-        const token = resp.data.token
+        const token = resp.data.data.token
         const userResp = await getUser(token) 
         state.token = token
         const client = await apiGetUserTasks(token)
@@ -29,6 +29,7 @@ export const islogin = async (state, user) => {
         localStorage.token = JSON.stringify(token)
         state.Tasks = tasksPending
         state.TasksSuccess = tasksSuccess
+        state.user = userResp.data
         login(userResp.data)
         router.push('/home')
         console.log(client.data)
