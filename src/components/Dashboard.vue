@@ -1,6 +1,6 @@
 <script>
   import { reTaskInDashboard } from '../helpers/storeHelpersTasks';
-import Navbar from './NavBar.vue'
+  import Navbar from './NavBar.vue'
   import Task from './Task.vue'
 
   // const navBar = Navbar

@@ -1,5 +1,4 @@
 <script>
-    import SideBar from './SideBar.vue'
     export default {
         data () {
             return {
@@ -10,10 +9,7 @@
             logout() {
                 this.$store.dispatch('isLogout')
             }
-        },
-        components: {
-            sideBar: SideBar,
-        },
+        }
     }
 </script>
 <template>
