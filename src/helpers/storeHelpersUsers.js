@@ -1,6 +1,6 @@
 import { apiLogin, apiPostUser, apiGetUserTasks, getUser } from '../api/users'
 import { errorSwal, login, loginError } from './modalSwal'
-import { changePasswordErrorSwal, changePasswordSwal } from './modalSwalUser'
+import { changeNameUserSwal, changePasswordErrorSwal, changePasswordSwal } from './modalSwalUser'
 import router from '../routes/index'
 import store from '../store'
 
@@ -49,7 +49,6 @@ export const changePasswordUser = async (state, user) => {
         newpassword: user.newpassword
       }
       const resp = await changePasswordSwal(password, token)
-      console.log(resp)
       if(resp.data.data.nick_name) {
         router.push('/')
       }
@@ -57,6 +56,16 @@ export const changePasswordUser = async (state, user) => {
     } else if(user.newpassword !== user.repeatnewpassword){
       errorSwal('Las contraseña Nueva no son Iguales')
     }
+  } catch (error) {
+    console.log('error: ', error)
+  }
+}
+
+export const changenameuser= async (state, user) => {
+  try {
+    const token = state.token
+    const resp = await changeNameUserSwal(user, token)
+    console.log(resp)
   } catch (error) {
     console.log('error: ', error)
   }
