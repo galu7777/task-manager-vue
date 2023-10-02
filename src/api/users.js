@@ -30,6 +30,11 @@ export const apiPostUser = (user) => {
     return api.post('/user', user);
 }
 
+export const apiPutUser = (user, token) => {
+    const data = { nick_name: user.nick_name }
+    return api.put('/user', data, { headers: { 'Authorization': `Bearer ${token}` }})
+}
+
 export const getUser = (token) => {
     return api.get('/user', { headers: { 'Authorization': `Bearer ${token}` } })
 }
