@@ -32,14 +32,6 @@
                 this.$store.dispatch('updateTasksSuccess', index)
             }
             
-        },
-        created() {
-            if(localStorage.tasksPending) {
-                this.tasksPending = JSON.parse(localStorage.tasksPending)
-            }
-            if(localStorage.tasksSuccess) {
-                this.tasksSuccess = JSON.parse(localStorage.tasksSuccess)
-            }
         }
     }
 </script>
