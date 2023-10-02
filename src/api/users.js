@@ -18,6 +18,10 @@ export const apiLogin = (user) => {
     } else return api.post('/login', user)
 }
 
+export const apiChangePassword = (password, token) => {
+    return api.put('/changepassword', password, { headers: { 'Authorization': `Bearer ${token}` } })
+}
+
 export const apiGetUserTasks = (token) => {
     return api.get('/tasks', { headers: { 'Authorization': `Bearer ${token}` }})
 }
