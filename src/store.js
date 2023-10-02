@@ -7,7 +7,7 @@ import {
   updatetask, 
   updatetasksuccess   
 } from './helpers/storeHelpersTasks'
-import { userregister, islogin, logout } from './helpers/storeHelpersUsers'
+import { userregister, islogin, logout, changePasswordUser } from './helpers/storeHelpersUsers'
 
 export default createStore({
   state: {
@@ -17,7 +17,7 @@ export default createStore({
     nameTask: null,
     nameTaskNew: null,
     isUserLoggedIn: false,
-    user: null,
+    userData: null,
     newUser: null,
     token: ''
   },
@@ -27,6 +27,9 @@ export default createStore({
     },
     userRegister(state){
       userregister(state)
+    },
+    changePassword(state, user){
+      changePasswordUser(state, user)
     },
     deletedTask(state, index) {
       deletedtask(state, index)
@@ -78,6 +81,9 @@ export default createStore({
     },
     userRegister(context) {
       context.commit('userRegister')
+    },
+    changePassword(context, user) {
+      context.commit('changePassword', user)
     }
   }
 });
