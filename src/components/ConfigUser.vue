@@ -31,7 +31,9 @@
             async newPassword(){
                 return this.$store.dispatch('changePassword', this.user)
             },
-            hola(){console.log(hola)}
+            async newNameUser(){
+                return this.$store.dispatch('changeNameUser', this.user)
+            }
         }
     }
 </script>
@@ -60,13 +62,12 @@
             <v-divider></v-divider>
 
             <v-card-actions>
-            <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
 
-            <v-btn color="success">
-                Cambiar Nombre de Usuario
-
-            <v-icon icon="mdi-chevron-right" end></v-icon>
-            </v-btn>
+                <v-btn color="success" @click="newNameUser">
+                    Cambiar Nombre de Usuario
+                <v-icon icon="mdi-chevron-right" end></v-icon>
+                </v-btn>
             </v-card-actions>
         </v-card>
 
@@ -109,7 +110,6 @@
 
                     <v-btn color="success" @click="newPassword">
                         Cambiar Nombre de Usuario
-
                     <v-icon icon="mdi-chevron-right" end></v-icon>
                     </v-btn>
                 </v-card-actions>
