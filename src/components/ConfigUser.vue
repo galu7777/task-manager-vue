@@ -109,7 +109,7 @@
                     <v-spacer></v-spacer>
 
                     <v-btn color="success" @click="newPassword">
-                        Cambiar Nombre de Usuario
+                        Cambiar Contraseña
                     <v-icon icon="mdi-chevron-right" end></v-icon>
                     </v-btn>
                 </v-card-actions>
